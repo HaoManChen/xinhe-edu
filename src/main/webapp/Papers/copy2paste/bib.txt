@@ -1,0 +1,12 @@
+@article{journals/vc/ZhangLZX14,
+  author    = {Yun Zhang and
+               Jian Ling and
+               Xiaohong Zhang and
+               Hao Xie},
+  title     = {Image copy-and-paste with optimized gradient},
+  journal   = {The Visual Computer},
+  volume    = {30},
+  number    = {10},
+  pages     = {1169--1178},
+  year      = {2014}, 
+}

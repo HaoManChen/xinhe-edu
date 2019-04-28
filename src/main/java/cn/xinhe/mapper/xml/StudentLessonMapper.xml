@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.StudentLessonMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.StudentLesson" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="day" property="day" jdbcType="DATE" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="is_changed" property="isChanged" jdbcType="BIT" />
+    <result column="old_lesson_id" property="oldLessonId" jdbcType="VARCHAR" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="lesson_id" property="lessonId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from student_lesson
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.StudentLesson" >
+    insert into student_lesson (id, `day`, `state`, 
+      is_changed, old_lesson_id, student_id, 
+      lesson_id)
+    values (#{id,jdbcType=VARCHAR}, #{day,jdbcType=DATE}, #{state,jdbcType=TINYINT}, 
+      #{isChanged,jdbcType=BIT}, #{oldLessonId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, 
+      #{lessonId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.StudentLesson" >
+    update student_lesson
+    set `day` = #{day,jdbcType=DATE},
+      `state` = #{state,jdbcType=TINYINT},
+      is_changed = #{isChanged,jdbcType=BIT},
+      old_lesson_id = #{oldLessonId,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      lesson_id = #{lessonId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, `day`, `state`, is_changed, old_lesson_id, student_id, lesson_id
+    from student_lesson
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `day`, `state`, is_changed, old_lesson_id, student_id, lesson_id
+    from student_lesson
+  </select>
+  <select id="listByStudentIdAndState" resultType="cn.xinhe.dto.StudentLessonTotalInfo">
+    select c.name as lessonName,l.day_of_week as lessonDayOfWeek,l.sequence,sl.day as `date`
+    from student_lesson sl
+    left join lesson l
+    on l.id = sl.lesson_id
+    left join teacher_curriculum tc
+    on tc.id = l.teacher_curriculum_id
+    left join curriculum c
+    on c.id = tc.curriculum_id
+    where sl.student_id = #{studentId}
+    and state = #{state}
+  </select>
+    <select id="listOfWeekClass" resultType="cn.xinhe.dto.StudentLessonTotalInfo">
+      select c.name as lessonName,l.day_of_week as lessonDayOfWeek,l.sequence,sl.id as studentLessonId,t.name as teacherName,sl.day as `date`
+      from
+      student_lesson sl
+      left join lesson l
+      on l.id = sl.lesson_id
+      left join teacher_curriculum tc
+      on tc.id = l.teacher_curriculum_id
+      left join teacher t
+      on t.id = tc.teacher_id
+      left join curriculum c
+      on c.id = tc.curriculum_id
+      where sl.student_id = #{studentId}
+      and sl.day &gt;= #{nowDateShot}
+      and sl.day &lt;= #{afterWeekDateShot}
+    </select>
+</mapper>

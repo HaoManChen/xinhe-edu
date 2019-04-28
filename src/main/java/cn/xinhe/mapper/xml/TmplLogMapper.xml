@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.TmplLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.TmplLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="to_user" property="toUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tmpl_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.TmplLog" >
+    insert into tmpl_log (id, to_user)
+    values (#{id,jdbcType=VARCHAR}, #{toUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.TmplLog" >
+    update tmpl_log
+    set to_user = #{toUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, to_user
+    from tmpl_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, to_user
+    from tmpl_log
+  </select>
+</mapper>

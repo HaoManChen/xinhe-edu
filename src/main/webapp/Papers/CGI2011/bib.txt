@@ -1,0 +1,9 @@
+@article{journals/vc/ZhangT11
+author={Zhang Yun and Tong Ruofeng},
+title={Environment-Sensitive cloning in images},
+journal={The Visual Computer},
+volume={27},
+number={6-8},
+pages={739-748},
+year={2011},
+}

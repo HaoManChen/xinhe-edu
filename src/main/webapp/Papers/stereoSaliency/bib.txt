@@ -1,0 +1,12 @@
+@article{journals/vc/TangTTZ15,
+  author    = {Yanlong Tang and
+               Ruofeng Tong and
+              Min Tang and
+               Yun Zhang},
+  title     = {Depth incorporating with color improves salient object detection},
+  journal   = {The Visual Computer},
+  volume    = {},
+  number    = {},
+  pages     = {},
+  year      = {2015}, 
+}

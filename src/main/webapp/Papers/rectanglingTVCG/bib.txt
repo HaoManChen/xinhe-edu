@@ -1,0 +1,8 @@
+@article{journals/TVCG/ZhangLZ18,
+  author = {Yun Zhang, Yu-Kun Lai, Fang-Lue Zhang},
+  title = {Content-Preserving Image Stitching with Regular Boundary Constraints},
+  journal = {ArXiv e-prints},
+  archivePrefix = {arXiv},
+  eprint = {arXiv:11810.11220},
+  year = {2018},
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.LessonMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.Lesson" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="day_of_week" property="dayOfWeek" jdbcType="TINYINT" />
+    <result column="sequence" property="sequence" jdbcType="TINYINT" />
+    <result column="teacher_curriculum_id" property="teacherCurriculumId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from lesson
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.Lesson" >
+    insert into lesson (id, day_of_week, `sequence`, 
+      teacher_curriculum_id)
+    values (#{id,jdbcType=VARCHAR}, #{dayOfWeek,jdbcType=TINYINT}, #{sequence,jdbcType=TINYINT}, 
+      #{teacherCurriculumId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.Lesson" >
+    update lesson
+    set day_of_week = #{dayOfWeek,jdbcType=TINYINT},
+      `sequence` = #{sequence,jdbcType=TINYINT},
+      teacher_curriculum_id = #{teacherCurriculumId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, day_of_week, `sequence`, teacher_curriculum_id
+    from lesson
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, day_of_week, `sequence`, teacher_curriculum_id
+    from lesson
+  </select>
+</mapper>

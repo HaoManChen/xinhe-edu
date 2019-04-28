@@ -1,0 +1,24 @@
+server:
+  servlet:
+    context-path: /xinhe-education
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    tomcat:
+      max-active: 200
+      max-idle: 5
+      min-idle: 5
+      validation-query: select 1
+      test-on-borrow: true
+      test-while-idle: true
+      remove-abandoned: true
+  jackson:
+    default-property-inclusion: non-null
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:cn/xinhe/mapper/xml/*Mapper.xml
+

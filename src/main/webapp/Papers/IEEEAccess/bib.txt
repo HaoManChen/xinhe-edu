@@ -1,0 +1,17 @@
+@article{journals/access/SongTDZJ18,
+  author    = {Dan Song and
+               Ruofeng Tong and
+               Jiang Du and
+               Yun Zhang and
+               Yao Jin},
+  title     = {Data-Driven 3-D Human Body Customization With a Mobile Device},
+  journal   = {{IEEE} Access},
+  volume    = {6},
+  pages     = {27939--27948},
+  year      = {2018},
+  url       = {https://doi.org/10.1109/ACCESS.2018.2837147},
+  doi       = {10.1109/ACCESS.2018.2837147},
+  timestamp = {Thu, 30 Aug 2018 16:13:53 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/access/SongTDZJ18},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}

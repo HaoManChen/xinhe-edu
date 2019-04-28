@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.WxServiceUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.WxServiceUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="wx_user_id" property="wxUserId" jdbcType="VARCHAR" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="subscribed" property="subscribed" jdbcType="TINYINT" />
+    <result column="subscribe_time" property="subscribeTime" jdbcType="TIMESTAMP" />
+    <result column="unsubscribe_time" property="unsubscribeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wx_service_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.WxServiceUser" >
+    insert into wx_service_user (id, wx_user_id, appid, 
+      openid, subscribed, subscribe_time, 
+      unsubscribe_time)
+    values (#{id,jdbcType=VARCHAR}, #{wxUserId,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{subscribed,jdbcType=TINYINT}, #{subscribeTime,jdbcType=TIMESTAMP}, 
+      #{unsubscribeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.WxServiceUser" >
+    update wx_service_user
+    set wx_user_id = #{wxUserId,jdbcType=VARCHAR},
+      appid = #{appid,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      subscribed = #{subscribed,jdbcType=TINYINT},
+      subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+      unsubscribe_time = #{unsubscribeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, wx_user_id, appid, openid, subscribed, subscribe_time, unsubscribe_time
+    from wx_service_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, wx_user_id, appid, openid, subscribed, subscribe_time, unsubscribe_time
+    from wx_service_user
+  </select>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.WxAppSessionMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.WxAppSession" >
+    <id column="wx_app_session_id" property="wxAppSessionId" jdbcType="VARCHAR" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="session_key" property="sessionKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wx_app_session
+    where wx_app_session_id = #{wxAppSessionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.WxAppSession" >
+    insert into wx_app_session (wx_app_session_id, appid, openid, 
+      session_key)
+    values (#{wxAppSessionId,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{sessionKey,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.WxAppSession" >
+    update wx_app_session
+    set appid = #{appid,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      session_key = #{sessionKey,jdbcType=VARCHAR}
+    where wx_app_session_id = #{wxAppSessionId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select wx_app_session_id, appid, openid, session_key
+    from wx_app_session
+    where wx_app_session_id = #{wxAppSessionId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select wx_app_session_id, appid, openid, session_key
+    from wx_app_session
+  </select>
+  <select id="countOfAppidAndOpenid" resultType="java.lang.Integer" >
+    select count(*)
+    from wx_app_session
+    where
+    appid = #{appid,jdbcType=VARCHAR}
+    and
+    openid = #{openid,jdbcType=VARCHAR}
+  </select>
+  <select id="getMemberIdAndOpenidAndAppidBySessionId" resultType="cn.xinhe.dto.MemberDTO">
+    select member_id as memberId,was.appid,was.openid,wau.wx_user_id as wxUserId
+    from wx_app_session was
+    left join
+    wx_app_user wau
+    on
+    wau.appid = was.appid and wau.openid = was.openid
+    left join member_wx_user mwu on
+    mwu.wx_user_id = wau.wx_user_id
+    where
+    was.wx_app_session_id = #{sessionId,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByAppidAndOpenid" parameterType="cn.xinhe.domain.WxAppSession" >
+    update wx_app_session
+    set wx_app_session_id = #{wxAppSessionId,jdbcType=VARCHAR},
+      session_key = #{sessionKey,jdbcType=VARCHAR}
+    where
+    appid = #{appid,jdbcType=VARCHAR}
+    and
+    openid = #{openid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectMemberIdBySessionId" parameterType="java.lang.String" resultType="cn.xinhe.dto.WxAppUserDTO">
+		SELECT
+		c.member_id as memberId,
+		b.wx_user_id as wxUserId,
+		a.openid as openId,
+		a.appid as appId,
+		d.phone as mobile
+		FROM
+		wx_app_session a
+		LEFT JOIN wx_app_user b ON a.openid = b.openid
+		AND
+		a.appid = b.appid
+		LEFT JOIN member_wx_user c ON b.wx_user_id =
+		c.wx_user_id
+		LEFT JOIN member d on c.member_id = d.id
+		WHERE
+		a.wx_app_session_id = #{sessionId,jdbcType=VARCHAR}
+	</select>
+</mapper>

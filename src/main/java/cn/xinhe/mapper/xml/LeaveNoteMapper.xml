@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.LeaveNoteMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.LeaveNote" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="leave_time" property="leaveTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="student_lesson_id" property="studentLessonId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from leave_note
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.LeaveNote" >
+    replace into leave_note (id, reason, leave_time,
+      `state`, student_lesson_id)
+    values (#{id,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{leaveTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=TINYINT}, #{studentLessonId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.LeaveNote" >
+    update leave_note
+    set reason = #{reason,jdbcType=VARCHAR},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      `state` = #{state,jdbcType=TINYINT},
+      student_lesson_id = #{studentLessonId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, reason, leave_time, `state`, student_lesson_id
+    from leave_note
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, reason, leave_time, `state`, student_lesson_id
+    from leave_note
+  </select>
+  <select id="listByStudentId" resultType="cn.xinhe.dto.LeaveClassListInfo">
+    select ln.leave_time,ln.state,ln.reason,c.name as leaveClassName,l.day_of_week as leaveDayOfWeek,l.sequence
+    from leave_note ln
+    inner join student_lesson sl
+    on sl.id = ln.student_lesson_id
+    left join lesson l on
+    l.id = sl.lesson_id
+    left join
+    teacher_curriculum tc
+    on tc.id = l.teacher_curriculum_id
+    left join curriculum c
+    on c.id = tc.curriculum_id
+    where sl.student_id = #{studentId}
+  </select>
+</mapper>

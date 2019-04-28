@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.WxUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.WxUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wx_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.WxUser" >
+    insert into wx_user (id, nick_name, head_img_url, 
+      sex, country, province, 
+      city, unionid)
+    values (#{id,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{headImgUrl,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.WxUser" >
+    update wx_user
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, nick_name, head_img_url, sex, country, province, city, unionid
+    from wx_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, nick_name, head_img_url, sex, country, province, city, unionid
+    from wx_user
+  </select>
+  <select id="selectWxUserIdByUnionid" resultType="java.lang.String" >
+    select
+    wx_user_id
+    from wx_user
+    where
+    unionid = #{unionid,jdbcType=VARCHAR}
+  </select>
+  <select id="countOfWxUserId" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select count(*)
+    from wx_user
+    where wx_user_id = #{wxUserId,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByWxUserId" parameterType="cn.xinhe.domain.WxUser" >
+    update wx_user
+    set
+    <if test="nickName!=null">
+      nick_name = #{nickName,jdbcType=VARCHAR},
+    </if>
+    <if test="headImgUrl!=null">
+      head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="sex!=null">
+      sex = #{sex,jdbcType=VARCHAR},
+    </if>
+    <if test="country!=null">
+      country = #{country,jdbcType=VARCHAR},
+    </if>
+    <if test="province!=null">
+      province = #{province,jdbcType=VARCHAR},
+    </if>
+    <if test="city!=null">
+      city = #{city,jdbcType=VARCHAR},
+    </if>
+    <if test="unionid!=null">
+      unionid = #{unionid,jdbcType=VARCHAR},
+    </if>
+    wx_user_id = #{wxUserId,jdbcType=VARCHAR}
+    where wx_user_id = #{wxUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="cn.xinhe.dto.WxAppUserInfo" >
+    update wx_user
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      head_img_url = #{avatarUrl,jdbcType=VARCHAR},
+      sex = #{gender,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      unionid = #{unionId,jdbcType=VARCHAR}
+    where id = #{wxUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>

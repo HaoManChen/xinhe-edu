@@ -1,0 +1,11 @@
+@article{journals/vc/ZhangLZ19
+author={Yun Zhang and
+        Yu-Kun Lai and
+        Fang-Lue Zhang},
+title={Stereoscopic Image Stitching with Rectangular Boundaries},
+journal={The Visual Computer},
+volume={},
+number={},
+pages={},
+year={2019},
+}

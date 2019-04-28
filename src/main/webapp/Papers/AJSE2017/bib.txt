@@ -1,0 +1,12 @@
+@article{journals/ajse/YuanZCW17,
+  author    = {Yue Yuan and
+               Yun Zhang and
+               Shuang Chen and
+               Hong Wang},
+  title     = {Robust Region Duplication Detection on Log-Polar Domain Using Band Limitation},
+  journal   = {Arabian Journal of Science and Engineering},
+  volume    = {},
+  number    = {42},
+  pages     = {559--565},
+  year      = {2017},  
+}

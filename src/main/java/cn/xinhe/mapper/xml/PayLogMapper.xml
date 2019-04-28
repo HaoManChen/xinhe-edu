@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xinhe.mapper.PayLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.xinhe.domain.PayLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pay_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xinhe.domain.PayLog" >
+    insert into pay_log (id, amount, student_id, 
+      pay_time)
+    values (#{id,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.PayLog" >
+    update pay_log
+    set amount = #{amount,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, amount, student_id, pay_time
+    from pay_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, amount, student_id, pay_time
+    from pay_log
+  </select>
+</mapper>

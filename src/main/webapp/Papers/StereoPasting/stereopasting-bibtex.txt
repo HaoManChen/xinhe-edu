@@ -1,0 +1,11 @@
+@article{journals/tvcg/TongZC13,
+  author    = {Ruo-feng Tong and
+               Yun Zhang and
+               Ke-Li Cheng},
+  title     = {StereoPasting: Interactive Composition in Stereoscopic Images},
+  journal   = {IEEE Trans. Vis. Comput. Graph.},
+  volume    = {19},
+  number    = {8},
+  pages     = {1375--1385},
+  year      = {2013},  
+}

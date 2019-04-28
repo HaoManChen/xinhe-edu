@@ -1,0 +1,11 @@
+@article{journals/cgf/TongZD11,
+  author    = {Ruofeng Tong and
+               Yun Zhang and
+               Meng Ding},
+  title     = {Video Brush: {A} Novel Interface for Efficient Video Cutout},
+  journal   = {Comput. Graph. Forum},
+  volume    = {30},
+  number    = {7},
+  pages     = {2049--2057},
+  year      = {2011}  
+}
