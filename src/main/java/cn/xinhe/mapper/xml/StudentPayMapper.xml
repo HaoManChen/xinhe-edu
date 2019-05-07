@@ -67,7 +67,7 @@
     from student_pay sp
     left join lesson l on l.teacher_curriculum_id = sp.teacher_curriculum_id
     where
-      l.lessonId = #{lessonId,jdbcType=VARCHAR}
+      l.id = #{lessonId,jdbcType=VARCHAR}
     and
       sp.student_id = #{studentId,jdbcType=VARCHAR}
     </select>

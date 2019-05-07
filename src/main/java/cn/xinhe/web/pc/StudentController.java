@@ -108,7 +108,7 @@ public class StudentController {
 
     @PostMapping("/buyLesson")
     @Transactional
-    public BaseResponseBody<Object> buyLesson(@RequestBody BuyLessonDTO buyLessonDTO,@RequestParam String studentId){
+    public BaseResponseBody<Object> buyLesson(@RequestBody BuyLessonDTO buyLessonDTO){
         List<DayLessonDTO> dayLessonDTOList = buyLessonDTO.getLessonList();
         dayLessonDTOList.forEach(a->{
             StudentPay studentPay = studentPayMapper.getByStudentIdAndLessonId(a.getLessonId(),buyLessonDTO.getStudentId());
@@ -121,7 +121,7 @@ public class StudentController {
                 studentPay = new StudentPay();
                 studentPay.setAmount(amount);
                 studentPay.setId(UUID.randomUUID().toString().replaceAll("-",""));
-                studentPay.setStudentId(studentId);
+                studentPay.setStudentId(buyLessonDTO.getStudentId());
                 studentPay.setTeacherCurriculumId(lesson.getTeacherCurriculumId());
                 studentPay.setTotalLesson(a.getDayAndAmount().size());
                 studentPay.setUsedLesson(0);
@@ -142,7 +142,7 @@ public class StudentController {
         payLog.setId(UUID.randomUUID().toString().replaceAll("-",""));
         payLog.setAmount(amount);
         payLog.setPayTime(new Date());
-        payLog.setStudentId(studentId);
+        payLog.setStudentId(buyLessonDTO.getStudentId());
         payLogMapper.insert(payLog);
         List<StudentLesson> studentLessonList = new LinkedList<>();
         for (DayLessonDTO dayLessonDTO : dayLessonDTOList) {
@@ -153,7 +153,7 @@ public class StudentController {
                 studentLesson.setIsChanged(false);
                 studentLesson.setState((byte)1);
                 studentLesson.setLessonId(dayLessonDTO.getLessonId());
-                studentLesson.setStudentId(studentId);
+                studentLesson.setStudentId(buyLessonDTO.getStudentId());
                 studentLessonList.add(studentLesson);
             }
         }
