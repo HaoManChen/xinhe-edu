@@ -16,7 +16,16 @@
     values (#{id,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{curriculumId,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.TeacherCurriculum" >
+    <insert id="insertAll">
+      insert into teacher_curriculum (id, teacher_id, curriculum_id
+      )
+    values
+    <foreach collection="list" separator="," item="item">
+      (#{item.id,jdbcType=VARCHAR}, #{item.teacherId,jdbcType=VARCHAR}, #{item.curriculumId,jdbcType=VARCHAR}
+      )
+    </foreach>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.TeacherCurriculum" >
     update teacher_curriculum
     set teacher_id = #{teacherId,jdbcType=VARCHAR},
       curriculum_id = #{curriculumId,jdbcType=VARCHAR}
@@ -30,5 +39,28 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, teacher_id, curriculum_id
     from teacher_curriculum
+  </select>
+    <select id="getAllToTeacherAllLessonDTO" resultType="cn.xinhe.dto.TeacherAllLessonDTO">
+      select t.name as teacherName,t.id as teacherId,t.level,c.id as curriculumId,c.name as curriculumName,l.day_of_week,l.sequence,l.id as lessonId
+      from teacher_curriculum tc
+      inner join teacher t on t.id = tc.teacher_id
+      inner join curriculum c on c.id  = tc.curriculum_id
+      inner join lesson l on l.teacher_curriculum_id = tc.id
+    </select>
+  <select id="getSimpleTeacherLessonByTeacherId" resultType="cn.xinhe.dto.TeacherAllLessonDTO">
+    select t.name as teacherName,t.id as teacherId,t.level,c.id as curriculumId,c.name as curriculumName,l.day_of_week,l.sequence,l.id as lessonId
+      from teacher_curriculum tc
+      inner join teacher t on t.id = tc.teacher_id
+      inner join curriculum c on c.id  = tc.curriculum_id
+      inner join lesson l on l.teacher_curriculum_id = tc.id
+      where tc.teacher_id = #{teacherId,jdbcType=VARCHAR}
+  </select>
+  <select id="getSimpleCurriculumLessonByCurriculumId" resultType="cn.xinhe.dto.TeacherAllLessonDTO">
+     select t.name as teacherName,t.id as teacherId,t.level,c.id as curriculumId,c.name as curriculumName,l.day_of_week,l.sequence,l.id as lessonId
+      from teacher_curriculum tc
+      inner join teacher t on t.id = tc.teacher_id
+      inner join curriculum c on c.id  = tc.curriculum_id
+      inner join lesson l on l.teacher_curriculum_id = tc.id
+      where tc.curriculum_id = #{curriculumId,jdbcType=VARCHAR}
   </select>
 </mapper>

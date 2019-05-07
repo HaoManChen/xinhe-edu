@@ -27,4 +27,9 @@
     select id, `name`
     from curriculum
   </select>
+    <select id="selectCountByName" resultType="java.lang.Integer">
+      select count(*)
+      from curriculum
+      where name = #{name,jdbcType=VARCHAR}
+    </select>
 </mapper>

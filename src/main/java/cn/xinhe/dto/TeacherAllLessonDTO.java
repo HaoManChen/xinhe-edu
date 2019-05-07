@@ -8,12 +8,12 @@ import lombok.Data;
  */
 @Data
 public class TeacherAllLessonDTO {
-    private String TeacherName;
+    private String teacherName;
     private String level;
     private String teacherId;
     private String curriculumId;
     private String curriculumName;
+    private String lessonId;
     private Integer dayOfWeek;
     private Integer sequence;
-
 }

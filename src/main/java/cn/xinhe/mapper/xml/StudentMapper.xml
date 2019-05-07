@@ -13,9 +13,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.xinhe.domain.Student" >
-    insert into student (id, `name`, age, 
+    insert into student ( `name`, age,
       birthday, member_id)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+    values ( #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
       #{birthday,jdbcType=DATE}, #{memberId,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.Student" >
@@ -31,13 +31,16 @@
     from student
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, `name`, age, birthday, member_id
-    from student
+  <select id="selectAll" resultType="cn.xinhe.dto.StudentDTO" >
+    select s.id, s.name, s.age, s.birthday, s.member_id ,m.phone
+    from student s
+    left join member m
+    on m.id = s.member_id
   </select>
     <select id="getByMemberId" resultMap="BaseResultMap">
       select *
       from student
       where member_id = #{memberId,jdbcType=VARCHAR}
     </select>
+
 </mapper>

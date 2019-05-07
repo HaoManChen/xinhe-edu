@@ -17,7 +17,16 @@
     values (#{id,jdbcType=VARCHAR}, #{dayOfWeek,jdbcType=TINYINT}, #{sequence,jdbcType=TINYINT}, 
       #{teacherCurriculumId,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.Lesson" >
+    <insert id="insertAll">
+      insert into lesson (id, day_of_week, `sequence`,
+      teacher_curriculum_id)
+    values
+    <foreach collection="list" separator="," item="item">
+      (#{item.id,jdbcType=VARCHAR}, #{item.dayOfWeek,jdbcType=TINYINT}, #{item.sequence,jdbcType=TINYINT},
+      #{item.teacherCurriculumId,jdbcType=VARCHAR})
+    </foreach>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.xinhe.domain.Lesson" >
     update lesson
     set day_of_week = #{dayOfWeek,jdbcType=TINYINT},
       `sequence` = #{sequence,jdbcType=TINYINT},

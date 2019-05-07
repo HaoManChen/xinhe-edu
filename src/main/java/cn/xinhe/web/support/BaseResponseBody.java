@@ -30,6 +30,12 @@ public class BaseResponseBody<T> {
 		this.errmsg = errorCode.getDefaultMessage();
 		this.data = data;
 	}
+	public static BaseResponseBody ok() {
+		return ok(null);
+	}
+	public static BaseResponseBody ok(Object data) {
+		return new BaseResponseBody(BaseCode.OK,data);
+	}
 
 	public BaseResponseBody(BaseCode errorCode, String errorMessage, T data) {
 		if (errorCode != null) {

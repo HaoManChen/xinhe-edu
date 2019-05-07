@@ -1,6 +1,7 @@
 server:
+  port: 8082
   servlet:
-    context-path: /xinhe-education
+    context-path: /xinhe-edu
 
 spring:
   profiles:

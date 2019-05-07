@@ -53,4 +53,22 @@
     from student_pay
     where student_id = #{studentId,jdbcType=VARCHAR}
   </select>
+    <select id="getByStudentIdAndTeacherCurriculumId" resultType="cn.xinhe.domain.StudentPay">
+      select id, amount, total_lesson, used_lesson, teacher_curriculum_id, student_id
+    from student_pay
+    where
+      teacher_curriculum_id = #{teacherCurriculumId,jdbcType=VARCHAR}
+    and
+      student_id = #{studentId,jdbcType=VARCHAR}
+
+    </select>
+    <select id="getByStudentIdAndLessonId" resultType="cn.xinhe.domain.StudentPay">
+    select sp.id, sp.amount, sp.total_lesson, sp.used_lesson, sp.teacher_curriculum_id, sp.student_id
+    from student_pay sp
+    left join lesson l on l.teacher_curriculum_id = sp.teacher_curriculum_id
+    where
+      l.lessonId = #{lessonId,jdbcType=VARCHAR}
+    and
+      sp.student_id = #{studentId,jdbcType=VARCHAR}
+    </select>
 </mapper>

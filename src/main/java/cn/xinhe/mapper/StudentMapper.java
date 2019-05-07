@@ -1,6 +1,8 @@
 package cn.xinhe.mapper;
 
 import cn.xinhe.domain.Student;
+import cn.xinhe.domain.StudentPay;
+import cn.xinhe.dto.StudentDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,9 +14,10 @@ public interface StudentMapper {
 
     Student selectByPrimaryKey(String id);
 
-    List<Student> selectAll();
+    List<StudentDTO> selectAll();
 
     int updateByPrimaryKey(Student record);
 
     List<Student> getByMemberId(String memberId);
+
 }

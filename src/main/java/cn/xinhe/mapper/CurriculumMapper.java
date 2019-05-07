@@ -1,8 +1,10 @@
 package cn.xinhe.mapper;
 
 import cn.xinhe.domain.Curriculum;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface CurriculumMapper {
     int deleteByPrimaryKey(String id);
 
@@ -13,4 +15,6 @@ public interface CurriculumMapper {
     List<Curriculum> selectAll();
 
     int updateByPrimaryKey(Curriculum record);
+
+    int selectCountByName(String name);
 }

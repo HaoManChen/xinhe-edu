@@ -1,8 +1,10 @@
 package cn.xinhe.mapper;
 
 import cn.xinhe.domain.Teacher;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface TeacherMapper {
     int deleteByPrimaryKey(String id);
 

@@ -1,8 +1,10 @@
 package cn.xinhe.mapper;
 
 import cn.xinhe.domain.Lesson;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface LessonMapper {
     int deleteByPrimaryKey(String id);
 
@@ -13,4 +15,6 @@ public interface LessonMapper {
     List<Lesson> selectAll();
 
     int updateByPrimaryKey(Lesson record);
+
+    void insertAll(List<Lesson> lessons);
 }

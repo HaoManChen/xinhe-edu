@@ -2,6 +2,7 @@ package cn.xinhe.mapper;
 
 import cn.xinhe.domain.StudentPay;
 import cn.xinhe.dto.StatisticsInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface StudentPayMapper {
     List<StatisticsInfo> getStatisticsByStudentId(String studentId);
 
     List<StudentPay> listOfStudentId(String studentId);
+
+    StudentPay getByStudentIdAndTeacherCurriculumId(String teacherCurriculumId, String studentId);
+
+    StudentPay getByStudentIdAndLessonId(@Param("lessonId") String lessonId,@Param("studentId") String studentId);
 }

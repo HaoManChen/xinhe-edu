@@ -20,5 +20,9 @@ public interface StudentLessonMapper {
 
     List<StudentLessonTotalInfo> listByStudentIdAndState(@Param("studentId")String studentId,@Param("state")Byte state);
 
+    List<StudentLessonTotalInfo> listByStudentId(@Param("studentId")String studentId);
+
     List<StudentLessonTotalInfo> listOfWeekClass(@Param("nowDateShot") String nowDateShot, @Param("afterWeekDateShot") String afterWeekDateShot, @Param("studentId") String studentId);
+
+    void insertAll(List<StudentLesson> studentLessonList);
 }

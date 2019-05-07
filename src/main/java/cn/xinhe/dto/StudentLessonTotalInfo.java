@@ -23,6 +23,10 @@ public class StudentLessonTotalInfo {
      * 第几节课
      */
     private Integer sequence;
+    /**
+     * 课程状态 1未上课 2已上课
+     */
+    private Integer state;
 
     private String date;
 
